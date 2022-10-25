@@ -87,11 +87,12 @@ void loop() {
   }
 
   if(system_ready == true) {
-    servoControl(time1, time2, time3, time4);
+    servoControl();
   }
 
   if(readyTime >= 0 && motor_running == true) {
     digitalWrite(mixer, HIGH);
+    avoidTimer = false;
     readyTime--;
 
     delay(1000);
@@ -101,9 +102,9 @@ void loop() {
   }
 }
 
-void servoControl(int t1, int t2, int t3, int t4) {
- if(t1 > 0) {
-    t1--;
+void servoControl() {
+ if(time1 > 0) {
+    time1--;
     Serial.println("active");
     servo1.write(90);
     delay(100);
@@ -115,8 +116,8 @@ void servoControl(int t1, int t2, int t3, int t4) {
     motor_running = true;
   }
 
-  if(t2 > 0) {
-    t2--;
+  if(time2 > 0) {
+    time2--;
     servo2.write(90);
     delay(100);
 
@@ -127,8 +128,8 @@ void servoControl(int t1, int t2, int t3, int t4) {
     motor_running = true;
   }
 
-  if(t3 > 0) {
-    t3--;
+  if(time3 > 0) {
+    time3--;
     servo3.write(90);
     delay(100);
 
@@ -139,8 +140,8 @@ void servoControl(int t1, int t2, int t3, int t4) {
     motor_running = true;
   }
 
-  if(t4 > 0) {
-    t4--;
+  if(time4 > 0) {
+    time4--;
     servo4.write(90);
     delay(100);
 
@@ -150,11 +151,6 @@ void servoControl(int t1, int t2, int t3, int t4) {
     servo4.write(0);
     motor_running = true;
   } 
-
-  time1 = t1;
-  time2 = t2;
-  time3 = t3;
-  time4 = t4;
 
   if(avoidTimer == true && time1 <= 0 && time2 <= 0 && time3 <= 0 && time4 <= 0) {
     readyTime = 10;
