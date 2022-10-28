@@ -44,7 +44,10 @@ void setup() {
 
   Serial.begin(115200);
   servo1.setPeriodHertz(50);
-
+  servo2.setPeriodHertz(50);
+  servo3.setPeriodHertz(50);
+  servo4.setPeriodHertz(50);
+  
   servo1.attach(servo1Pin, minUs, maxUs);
   servo2.attach(servo2Pin, minUs, maxUs);
   servo3.attach(servo3Pin, minUs, maxUs);
